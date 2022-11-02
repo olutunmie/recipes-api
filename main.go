@@ -25,7 +25,7 @@ func init() {
 }
 
 func NewRecipeHandler(c *gin.Context) {
-	var recipe Recipe
+  var recipe Recipe
 	if err := c.ShouldBindJSON(&recipe); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error()})
