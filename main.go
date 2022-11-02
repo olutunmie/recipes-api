@@ -1,6 +1,7 @@
 package main
 
 import (
+<<<<<<< HEAD
 	"net/http"
 	"time"
 
@@ -41,3 +42,23 @@ func main() {
 	router.POST("/recipes", NewRecipeHandler)
 	router.Run()
 }
+=======
+	"time"
+
+	"github.com/gin-gonic/gin"
+)
+
+func main() {
+	router := gin.Default()
+	router.Run()
+}
+
+
+type Recipe struct{
+	Name string `json:"name"`
+	Tags []string `json:"tags"`
+	Ingredients []string `json:"ingredients"`
+	Instructions []string `json:"instructions"`
+	PublishedAt time.Time `json:"publishedAt"`
+}
+>>>>>>> b04f0d631ab9c6ef898b8f8200732ec1ae780505
