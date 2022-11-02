@@ -5,10 +5,12 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+
+	"github.com/rs/xid"
 )
 
 type Recipe struct {
-	Id           string    `json:"id"`
+	ID           string    `json:"id"`
 	Name         string    `json:"name"`
 	Tags         []string  `json:"tags"`
 	Ingredients  []string  `json:"ingredients"`
@@ -23,12 +25,15 @@ func init() {
 }
 
 func NewRecipeHandler(c *gin.Context) {
-  var recipe Recipe
+	var recipe Recipe
 	if err := c.ShouldBindJSON(&recipe); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			
-		})
+			"error": err.Error()})
+		return
 	}
+	recipe.ID = xid.New().String()
+	recipe.PublishedAt = time.Now()
+	recipes = append(recipes, recipe)
 }
 
 func main() {
